@@ -6,6 +6,8 @@
 
 # Suppression des containers existants et du répertoire d'installation RocketChat si le script a déjà été exécuté. De manière à repartir sur une installation propre.
 
+# TEST
+
 rm -fr ./Rocket.Chat/
 docker stop $(docker ps -a -q)
 docker rm $(docker ps -a -q)
