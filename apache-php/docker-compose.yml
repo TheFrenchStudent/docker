@@ -1,0 +1,14 @@
+version: '1.0'
+   
+services:
+  web:
+    build: .
+    ports:
+      - 8020:80
+    volumes:
+      - apache_data:/var/www/html
+    restart: always
+
+
+volumes:
+  apache_data: {}
