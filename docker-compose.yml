@@ -1,0 +1,38 @@
+# Version du docker-compose.
+
+version: '3.9'
+
+# Configuration des services : mongo (base de données), api_rest (partie backend, qui intéragira avec le serveur) et qui doit être dépendante de mongo) & react_s (la partie front, dépendant de la partie backend).
+
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - 5000:5000
+    volumes:
+      - mongo_db_data:/data/db
+
+  api_rest:
+    build: ./backend
+    volumes:
+      - backend:/usr/src/app
+    ports:
+      - 8080:8080
+    depends_on:
+      - mongo_db
+  
+  react_js:
+    build: ./frontend
+    depends_on:
+      - api_rest
+    volumes:
+      - frontend:/usr/src/app
+    ports:
+      - 3000:3000
+
+# Liste des volumes pour la persistance de données.
+
+volumes:
+  mongo_db_data:
+  backend:
+  frontend:
